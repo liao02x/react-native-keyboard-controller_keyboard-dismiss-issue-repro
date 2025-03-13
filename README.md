@@ -1,50 +1,15 @@
-# Welcome to your Expo app 👋
+# Keyboard dismiss issue reproduction
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an example project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app), then installed [`react-native-keyboard-controller`](https://github.com/kirillzyusko/react-native-keyboard-controller) and set up the screen with a `TextInput` and a `TouchableOpacity` to dismiss the keyboard.
 
-## Get started
+## Issue
+The issue is that the `KeyboardController.dismiss` stays pending until the first time the keyboard is dismissed, resolves right after the first time the keyboard is dismissed, then after that it would work as expected (when it's called, it dismisses the keyboard if it's shown, then resolves). 
 
-1. Install dependencies
+## Steps to reproduce
+- when the app is started, press on the `TouchableOpacity` to dismiss the keyboard
+- notice that the callback is not called (Alert is not shown)
+- press on the `TextInput` to focus it
+- press out of the `TextInput` to blur it and dismiss the keyboard
+- notice that the callback is called (Alert is shown)
+- now press on the `TouchableOpacity` to dismiss the keyboard, notice that the callback is called (Alert is shown) no matter if the keyboard is shown or not
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

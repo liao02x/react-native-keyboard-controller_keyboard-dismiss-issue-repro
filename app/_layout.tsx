@@ -5,6 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { KeyboardProvider } from "react-native-keyboard-controller";
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -28,6 +29,7 @@ export default function RootLayout() {
   }
 
   return (
+    <KeyboardProvider>
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -35,5 +37,6 @@ export default function RootLayout() {
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
+    </KeyboardProvider>
   );
 }
